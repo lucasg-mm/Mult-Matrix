@@ -1,5 +1,5 @@
 // Lucas Gabriel Mendes Miranda, 10265892
-// Outro cara aqui....
+// Lucas Gabriel de Araujo Silva, 11218880
 
 #include <omp.h>
 #include <mpi.h>
@@ -94,7 +94,8 @@ int *matrix_mult(int *A, int *B, int rows_per_proc)
     int new_el;
     int *result = calloc(rows_per_proc * N, sizeof(int)); // guarda o resultado da multiplicação
 
-    for (i = 0; i < rows_per_proc; i++)
+    #pragma omp parallel for  (i, j, new_el, offset, k) shared(result) num_threads(T)
+    for (i = 0; i < rows_per_proprivatec; i++)
     {
         for (j = 0; j < N; j++)
         {
